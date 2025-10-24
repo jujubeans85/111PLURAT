@@ -15,7 +15,7 @@ A Progressive Web App (PWA) Lo-Fi Music Player
 ## Files Structure
 
 ```
-111PLURAT_pwa_tracks/
+.
 ├── index.html          # Main HTML file with player UI
 ├── style.css           # Styling for the music player
 ├── app.js              # JavaScript logic for player functionality
