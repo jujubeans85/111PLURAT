@@ -1,83 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#1a1a2e">
-    <meta name="description" content="111PLURAT - A Progressive Web App Music Player">
-    <title>111PLURAT Music Player</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CrateJuice PWA - Bed Rewind</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js")
+        .then(() => console.log("Service Worker registered"))
+        .catch(err => console.error("SW fail:", err));
+    }
+  </script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>111PLURAT</h1>
-            <p class="subtitle">Lo-Fi Music Player</p>
-        </header>
-
-        <main class="player">
-            <div class="album-art">
-                <div class="vinyl-disc" id="vinylDisc">
-                    <div class="vinyl-center"></div>
-                </div>
-            </div>
-
-            <div class="track-info">
-                <h2 id="trackTitle">Select a track</h2>
-                <p id="trackArtist">111PLURAT</p>
-            </div>
-
-            <div class="progress-container">
-                <div class="time" id="currentTime">0:00</div>
-                <div class="progress-bar">
-                    <div class="progress" id="progress"></div>
-                </div>
-                <div class="time" id="duration">0:00</div>
-            </div>
-
-            <div class="controls">
-                <button class="control-btn" id="prevBtn" title="Previous">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
-                    </svg>
-                </button>
-                <button class="control-btn play-btn" id="playBtn" title="Play">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8 5v14l11-7z"/>
-                    </svg>
-                </button>
-                <button class="control-btn" id="nextBtn" title="Next">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="volume-control">
-                <svg class="volume-icon" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
-                </svg>
-                <input type="range" id="volumeSlider" min="0" max="100" value="70" class="volume-slider">
-            </div>
-
-            <div class="playlist">
-                <h3>Playlist</h3>
-                <ul id="trackList">
-                    <!-- Tracks will be populated by JavaScript -->
-                </ul>
-            </div>
-        </main>
-
-        <footer>
-            <p class="install-prompt" id="installPrompt" style="display: none;">
-                <button id="installBtn">Install App</button>
-            </p>
-        </footer>
+  <div id="app">
+    <h1>Bed Rewind Playlist</h1>
+    <audio id="player" controls></audio>
+    <div>
+      <button onclick="prevTrack()">⏮️ Prev</button>
+      <button onclick="togglePlay()">▶️ Play/Pause</button>
+      <button onclick="nextTrack()">⏭️ Next</button>
     </div>
-
-    <audio id="audioPlayer"></audio>
-    <script src="app.js"></script>
+    <p id="nowPlaying"></p>
+  </div>
 </body>
 </html>
