@@ -1,118 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CrateJuice — Sonic Postcards</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrateJuice Postcard</title>
+  <link rel="stylesheet" href="postcard.css">
+  <!-- QR code generator (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
-<body>
-  <header class="banner">
-    <div class="logo">Crate<span>Juice</span></div>
-    <div class="sub">Sonic Postcards · PLUR</div>
-    <div class="actions">
-      <button id="addBtn" class="ghost">＋ Add Track</button>
-    </div>
-  </header>
+<body class="theme-vintage">
+  <main class="card">
+    <header class="head">
+      <div class="brand">Crate<span>Juice</span> Postcard</div>
+      <div class="style-switch">
+        <select id="styleSel">
+          <option value="vintage">Vintage</option>
+          <option value="clean">Clean</option>
+          <option value="neon">Neon</option>
+        </select>
+      </div>
+    </header>
 
-  <main>
-    <section class="console skin-1200">
-      <div class="deck">
-        <div class="platter">
-          <div class="label">CJ</div>
-          <div class="dots"></div>
-          <div class="arm"></div>
-        </div>
-        <div class="deck-meta">
-          <div class="title-row">
-            <h2 id="trackTitle">—</h2>
-            <p id="trackSource" class="dim">—</p>
-          </div>
-          <div class="qr">
-            <a id="qrLink" href="#" target="_blank" rel="noopener">Open track link</a>
-            <button id="copyLink" class="ghost small-btn" title="Copy postcard link">Copy Link</button>
-          </div>
-          <div class="controls">
-            <audio id="player" crossorigin="anonymous"></audio>
-            <div class="row">
-              <button id="playBtn">▶︎ Play</button>
-              <button id="pauseBtn">❚❚ Pause</button>
-              <div class="vu">
-                <div class="vu-title">VU</div>
-                <div class="vu-bars">
-                  <div class="bar" id="vuL"></div>
-                  <div class="bar" id="vuR"></div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <label>Volume</label>
-              <input type="range" id="vol" min="0" max="1" step="0.01" value="0.8"/>
-              <label>Pitch</label>
-              <input type="range" id="pitch" min="0.5" max="1.5" step="0.01" value="1.0"/>
-            </div>
-            <div class="row">
-              <label>User</label>
-              <select id="userSel">
-                <option value="guest">guest</option>
-                <option value="mmi">mmi</option>
-                <option value="cbo">cbo</option>
-              </select>
-              <input id="memo" placeholder="note / quote (optional)" />
-            </div>
-          </div>
+    <section class="hero">
+      <div class="qr-wrap">
+        <div id="qrcode"></div>
+      </div>
+      <div class="meta">
+        <h1 id="title">Sonic Postcard</h1>
+        <p class="dim" id="desc">Scan to play the track.</p>
+        <div class="actions">
+          <a id="openLink" class="btn">▶ Open & Play</a>
+          <button id="copyBtn" class="btn ghost">Copy Link</button>
         </div>
       </div>
     </section>
 
-    <section class="tracks card">
-      <div class="row-header">
-        <h3>Crate</h3>
-        <div class="small dim">Local + Saved</div>
-      </div>
-      <ul id="trackList"></ul>
+    <section class="quote" id="quoteBox" hidden>
+      <blockquote id="quoteText"></blockquote>
+      <div class="from" id="quoteFrom"></div>
     </section>
 
-    <section class="recent card">
-      <h3>Recent Spins</h3>
-      <ul id="recentList"></ul>
-    </section>
+    <footer class="foot">
+      <small>Powered by CrateJuice · PLUR</small>
+    </footer>
   </main>
 
-  <footer>
-    <small>For my MMI & CBO — with love, Juice</small>
-  </footer>
-
-  <!-- Add Track Modal -->
-  <dialog id="trackModal">
-    <form method="dialog" class="modal">
-      <h3>Add Track</h3>
-      <label>Title
-        <input id="m_title" required placeholder="e.g., Mimi’s Drift"/>
-      </label>
-      <label>URL (streamable audio or external link)
-        <input id="m_url" required placeholder="https://..."/>
-      </label>
-      <label>Source
-        <select id="m_source">
-          <option value="file">file</option>
-          <option value="spotify">spotify</option>
-          <option value="soundcloud">soundcloud</option>
-          <option value="youtube">youtube</option>
-          <option value="other">other</option>
-        </select>
-      </label>
-      <label>Art (optional URL)
-        <input id="m_art" placeholder="https://..."/>
-      </label>
-      <menu>
-        <button value="cancel">Cancel</button>
-        <button id="m_save" value="default">Save</button>
-      </menu>
-      <p class="tip dim">Note: `<audio>` can only play direct audio files/streams. External platforms may open via link.</p>
-    </form>
-  </dialog>
-
-  <script src="app.js"></script>
+  <script src="postcard.js"></script>
 </body>
 </html>
